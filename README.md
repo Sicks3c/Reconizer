@@ -1,10 +1,9 @@
-<h1 align="center">
+<h2 align="center">
   <br>
   <a href="https://github.com/Sicks3c/Reconizer"><img src="https://i.imgur.com/NsJcFIJ.png" alt="Reconizer"></a>
   <br>
-  Photon
   <br>
-</h1>
+</h2>
 
 ## Summary
 
