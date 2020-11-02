@@ -55,8 +55,8 @@ getcert2(){
 
 getdomains(){
     printf "${GREEN}[+]${END} Getting domains from all\n"
-    amass enum -dL $ORG-domains.txt -config ~/opt/config.ini
-    amass enum -dL $ORG-domains2.txt -config ~/opt/config.ini
+    amass enum -df $ORG-domains.txt -config ~/opt/config.ini
+    amass enum -df $ORG-domains2.txt -config ~/opt/config.ini
     printf "${YELLOW}[+]${END} Script is done.\n"
 }
 getasn
