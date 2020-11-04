@@ -54,9 +54,12 @@ getcert2(){
 }
 
 getdomains(){
+    printf "${GREEN}[+]${END} Sorting domains\n"
+    cat $ORG-domains* | sort -u | tee -a unique
     printf "${GREEN}[+]${END} Getting domains from all\n"
-    amass enum -df $ORG-domains.txt -config ~/opt/config.ini
-    amass enum -df $ORG-domains2.txt -config ~/opt/config.ini
+    amass enum -df unique -config ~/opt/config.ini
+    printf "${YELLOW}[+]${END} Cleaning Thrash.\n"
+    mkdir $ORG ; mv *.txt $ORG/
     printf "${YELLOW}[+]${END} Script is done.\n"
 }
 getasn
