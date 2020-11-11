@@ -36,6 +36,8 @@ ORG=$1
 getrange () {
     printf "${GREEN}[+]${END} Getting IP Range of $ORG\n"
     cat "$ORG-ASN.txt" | metabigor net --asn | tee -a $ORG-range.txt
+    printf "${GREEN}[+]${END} Getting IP Range of $ORG V2\n"
+    echo "$ORG" | metabigor net --org | tee -a $ORG-range2.txt
 }
 
 getasn () {
@@ -45,7 +47,7 @@ getasn () {
 
 getcert () {
     printf "${GREEN}[+]${END} Getting Cert for $ORG\n"
-    for range in $(cat $ORG-range.txt); do amass intel -active -cidr $range;done | tee -a $ORG-domains2.txt
+    for range in $(cat $ORG-range*.txt); do amass intel -active -cidr $range;done | tee -a $ORG-domains2.txt
 }
 
 getcert2(){
