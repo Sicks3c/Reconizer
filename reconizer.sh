@@ -35,31 +35,37 @@ ORG=$1
 
 getrange () {
     printf "${GREEN}[+]${END} Getting IP Range of $ORG\n"
-    cat "$ORG-ASN.txt" | metabigor net --asn | tee -a $ORG-range.txt
+    cat "$ORG-ASN.txt" | metabigor net --asn | sudo tee -a $ORG-range.txt
+    printf "${GREEN}[+]${END} Getting IP Range of $ORG V2\n"
+    echo "$ORG" | metabigor net --org |sudo tee -a $ORG-range2.txt
 }
 
 getasn () {
     printf "${GREEN}[+]${END} Getting ASN of $ORG\n"
-    amass intel -org "$ORG" | awk -F ',' '{print $1}' | tee -a $ORG-ASN.txt
+    amass intel -org "$ORG" | awk -F ',' '{print $1}' | sudo tee -a $ORG-ASN.txt
 }
 
 getcert () {
     printf "${GREEN}[+]${END} Getting Cert for $ORG\n"
-    for range in $(cat $ORG-range.txt); do amass intel -active -cidr $range;done | tee -a $ORG-domains2.txt
+    for range in $(cat $ORG-range*.txt); do amass intel -active -cidr $range;done | sudo tee -a $ORG-domains2.txt
 }
 
 getcert2(){
     printf "${GREEN}[+]${END} Getting V2 Cert for $ORG\n"
-    for asn in $(cat $ORG-ASN.txt);do amass intel -active -asn $asn;done | tee -a $ORG-domains.txt
+    for asn in $(cat $ORG-ASN.txt);do amass intel -active -asn $asn;done | sudo tee -a $ORG-domains.txt
 }
 
 getdomains(){
     printf "${GREEN}[+]${END} Sorting domains\n"
+<<<<<<< HEAD
     cat $ORG-domains* | sort -u | tee -a $ORG-unique
+=======
+    cat $ORG-domains* | sort -u | sudo tee -a unique-$ORG
+>>>>>>> 8a044ac941a68f664acaf2738cae1b8ceafa3959
     printf "${GREEN}[+]${END} Getting domains from all\n"
-    amass enum -df unique -config /opt/config.ini
+    amass enum -brute -include crtsh -df unique-$ORG -config /opt/config.ini
     printf "${YELLOW}[+]${END} Cleaning Thrash.\n"
-    mkdir $ORG ; mv *.txt $ORG/
+    sudo mkdir $ORG ; sudo mv *.txt $ORG/
     printf "${YELLOW}[+]${END} Script is done.\n"
 }
 getasn
