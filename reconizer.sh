@@ -55,7 +55,7 @@ getcert2(){
 
 getdomains(){
     printf "${GREEN}[+]${END} Sorting domains\n"
-    cat $ORG-domains* | sort -u | tee -a unique
+    cat $ORG-domains* | sort -u | tee -a $ORG-unique
     printf "${GREEN}[+]${END} Getting domains from all\n"
     amass enum -df unique -config /opt/config.ini
     printf "${YELLOW}[+]${END} Cleaning Thrash.\n"

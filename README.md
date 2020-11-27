@@ -20,3 +20,7 @@ This tools is an automation that I did is based on the workflow that [Haklule](h
 ## Usage:
 
 ./reconizer $(ORG name)
+
+## Contributions
+
+Feel free to make a pull request if you want to add a new feature to this tool
